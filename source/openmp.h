@@ -10,7 +10,9 @@
 #include <deal.II/base/config.h>
 
 #include <atomic>
+#ifdef _OPENMP
 #include <omp.h>
+#endif
 
 /**
  * @name OpenMP parallel for macros
@@ -155,7 +157,11 @@ namespace ryujin
       if constexpr (false) {
 #endif
         thread_ready = true;
+#ifdef _OPENMP
         if (++n_threads_ready_ == omp_get_num_threads()) {
+#else
+        if (++n_threads_ready_ == 1) {
+#endif
           executed_payload_ = true;
           payload_();
         }

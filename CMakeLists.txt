@@ -28,8 +28,10 @@ project(ryujin CXX)
 # Set up compiler flags:
 #
 
-find_package(OpenMP REQUIRED)
-string(APPEND DEAL_II_CXX_FLAGS " ${OpenMP_CXX_FLAGS}")
+find_package(OpenMP)
+if(OpenMP_FOUND)
+  string(APPEND DEAL_II_CXX_FLAGS " ${OpenMP_CXX_FLAGS}")
+endif()
 #
 # Work around a bug with brew on darwin where libomp.dylib gets silently
 # dropped from the link line even though we try to add the library with a

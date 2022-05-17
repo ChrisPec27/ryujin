@@ -11,7 +11,9 @@
 #include <deal.II/base/multithread_info.h>
 #include <deal.II/base/utilities.h>
 
+#ifdef _OPENMP
 #include <omp.h>
+#endif
 
 #include <fstream>
 
@@ -33,7 +35,9 @@ int main(int argc, char *argv[])
 
   LSAN_DISABLE
   dealii::Utilities::MPI::MPI_InitFinalize mpi_initialization(argc, argv);
+#ifdef _OPENMP
   omp_set_num_threads(dealii::MultithreadInfo::n_threads());
+#endif
   LSAN_ENABLE
 
   LIKWID_INIT
