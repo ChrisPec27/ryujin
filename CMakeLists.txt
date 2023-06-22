@@ -41,6 +41,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
   string(APPEND DEAL_II_LINKER_FLAGS " ${OpenMP_CXX_LIBRARIES}")
 endif()
 
+string(APPEND DEAL_II_CXX_FLAGS " -fPIC")
 if(NOT ${DEAL_II_WITH_CXX17})
   string(APPEND DEAL_II_CXX_FLAGS " -std=c++17")
 endif()
